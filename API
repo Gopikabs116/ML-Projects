@@ -1,0 +1,45 @@
+import streamlit as st
+import pickle as pkl
+import warnings
+warnings.filterwarnings("ignore")
+
+
+st.set_page_config (page_title="Sleep health detection")
+st.header("Sleep health detection")
+
+s1=st.number_input("age",min_value=18.0,max_value=69.0)
+s2=st.selectbox("gender", options=(0,2))
+s3=st.selectbox("occupation", options=(0,11))
+s4=st.slider("bmi",min_value=16.0,max_value=45.0,step=1.0)
+s5=st.selectbox("country", options=(0,14))
+s6=st.slider("sleep_duration_hrs",min_value=3.0,max_value=10.5,step=1.0)
+s7=st.slider("sleep_quality_score",min_value=1.0,max_value=10.0,step=1.0)
+s8=st.slider("rem_percentage",min_value=10.0,max_value=30.0,step=1.0)
+s9=st.slider("deep_sleep_percentage",min_value=5.0,max_value=30.0,step=1.0)
+s10=st.slider("sleep_latency_mins",min_value=1.0,max_value=58.0,step=1.0)
+s11=st.selectbox("wake_episodes_per_night",options=(0,8))
+s12=st.slider("caffeine_mg_before_bed",min_value=0.0,max_value=400.0,step=1.0)
+s13=st.slider("alcohol_units_before_bed",min_value=0.0,max_value=6.0)
+s14=st.slider("screen_time_before_bed_mins",min_value=2.0,max_value=180.0,step=1.0)
+s15=st.selectbox("exercise_day",options=(0,1))
+s16=st.slider("steps_that_day",min_value=500.0,max_value=20000.0,step=1.0)
+s17=st.slider("nap_duration_mins",min_value=0.0,max_value=116.0,step=1.0)
+s18=st.slider("stress_score",min_value=1.0,max_value=10.0,step=1.0)
+s19=st.slider("work_hours_that_day",min_value=0.0,max_value=18.0,step=1.0)
+s20=st.selectbox("chronotype",options=(0,2))
+s21=st.selectbox("mental_health_condition",options=(0,3))
+s22=st.slider("heart_rate_resting_bpm",min_value=45.0,max_value=99.0,step=1.0)
+s23=st.selectbox("sleep_aid_used",options=(0,1))
+s24=st.selectbox("shift_work",options=(0,1))
+s25=st.selectbox("room_temperature_celsius",options=(15,28))
+s26=st.selectbox("weekend_sleep_diff_hrs",options=(-1,3))
+s27=st.selectbox("season",options=(0,3))
+s28=st.selectbox("day_type",options=(0,1))
+s29=st.slider("cognitive_performance_score",min_value=0.0,max_value=100.0,step=1.0)
+s30=st.selectbox("felt_rested",options=(0,1))
+
+data=[s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30]
+if st.button("Predict"):
+    model=pkl.load(open("/Users/gopika/PycharmProjects/PythonProject1/model.pkl",'rb'))
+    result=model.predict([data])
+    st.text(result)
